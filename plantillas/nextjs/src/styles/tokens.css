@@ -1,0 +1,52 @@
+/*
+ * Tokens del Figma (Tailwind v4 @theme). Cada nombre es el del Figma: el código dice lo mismo
+ * que el diseño. Reemplaza los valores de ejemplo por los de la página de variables del Figma.
+ * Medida del Figma sin token: agrégala aquí con su nombre y avisa al diseño en el PR; nunca
+ * p-[12px] en la clase (lo bloquea el plugin de Biome).
+ * Importa este archivo desde el CSS principal, después de @import "tailwindcss".
+ */
+@theme {
+	/* Espacio (p-md, gap-xl…) */
+	--spacing-xs: 4px;
+	--spacing-sm: 8px;
+	--spacing-md: 12px;
+	--spacing-lg: 16px;
+	--spacing-xl: 24px;
+	--spacing-2xl: 32px;
+
+	/* Radio (rounded-sm, rounded-lg…) */
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 12px;
+	--radius-xl: 16px;
+
+	/* Color de texto y superficie, con el nombre del Figma */
+	--color-text-primary: #0d1b1c;
+	--color-text-secondary: #404040;
+	--color-text-tertiary: #595959;
+	--color-text-accent: #0369a1;
+	--color-surface-card: #ffffff;
+	--color-surface-page: #f4f4f5;
+	--color-border-global: #e5e5e5;
+}
+
+/* Estilos de texto de la Typography Spec: uno por <Text>, más una clase de color. */
+@utility heading-page {
+	font-size: 24px;
+	line-height: 29px;
+	font-weight: 900;
+}
+@utility heading-section {
+	font-size: 14px;
+	line-height: 21px;
+	font-weight: 700;
+}
+@utility body {
+	font-size: 12px;
+	line-height: 18px;
+}
+@utility label-action {
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: 700;
+}

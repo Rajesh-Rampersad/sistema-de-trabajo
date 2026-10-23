@@ -69,7 +69,10 @@ Las reglas 1, 2 y 5 son `noRestrictedImports` en `biome.json`.
 
 - **Ruta fina** en `src/app/`: lee el parámetro y renderiza la pantalla de la feature.
 - **Estados** (loading, offline, vacío, error) son estados de la misma pantalla, no rutas. El
-  estado sale del dato; un `StateSwitcher` solo de desarrollo permite revisar cada card.
+  estado sale del dato; `useScreenState` (`src/shared/lib/use-screen-state.tsx`) da un
+  `StateSwitcher` solo de desarrollo para revisar cada card.
+- **Molde:** `src/features/example` (ruta `/ejemplo`) tiene todo esto armado: hook con
+  `isLoading`, estados, override de favoritos, test de pantalla y función pura con `it.each`.
 - **Un componente por bloque del Figma**, con el nombre del frame en un comentario
   (`// Figma: <frame> (card NN)`).
 - Safe area resuelta en el layout; la pantalla no suma insets.
@@ -110,6 +113,15 @@ Animaciones con Reanimated; respeta "Reducir animaciones". Lo que no la respete,
 - Pantalla: un test por mecanismo (conecta el hook, muestra el estado), mockeando el hook de
   `data/`. Sin tests de inventario.
 - Consulta de banco: banco en memoria con las migrations del app.
+
+## Cómo trabajamos
+
+- Comandos de Claude Code (`.claude/commands/`): `/retomar` (dónde quedamos, según el Estado del
+  plan), `/revisar` (diff + linter + tipos + tests, sin corregir), `/cerrar-paso` (commit +
+  plan) y `/pr` (descripción del PR desde `docs/pr.md`).
+- Plan de cada historia en `docs/superpowers/plans/` (plantilla `_plantilla.md`), con la sección
+  Estado al día al cerrar cada paso.
+- Antes de marcar un card como `feito`: `docs/checklist-pantalla.md`.
 
 ## Antes del PR
 

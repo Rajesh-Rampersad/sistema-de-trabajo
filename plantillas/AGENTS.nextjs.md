@@ -11,9 +11,11 @@ EQUIPO>. Revisor de diseño/PR: <NOMBRE>.
 
 ## Next.js cambia en cada versión
 
-Antes de usar una API (caché, `params`, Server Actions, metadata), lee la doc de la versión del
-`next` del `package.json` (`https://nextjs.org/docs`; elige la versión en el selector).
-No mezcles patrones del Pages Router.
+Antes de usar una API (caché, `params`, Server Actions, metadata), lee la doc de la versión
+instalada: `node_modules/next/dist/docs/` (Next.js 16 la trae en el paquete) o
+`https://nextjs.org/docs` con la versión del `package.json`. No mezcles patrones del Pages
+Router. Next escribe un bloque propio al principio de este archivo y lo re-agrega en cada
+`next dev`: déjalo y commitéalo.
 
 ## Estructura
 
@@ -55,6 +57,9 @@ Las reglas 1, 2 y 5 son `noRestrictedImports` en `biome.json`.
   `notFound()` + `not-found.tsx` (id inexistente). Vacío = estado de la pantalla.
 - Filtro y página van en la URL (`searchParams`), no en `useState`: el link se puede compartir
   y el servidor ya renderiza filtrado.
+- **Molde:** `src/features/example` (ruta `/ejemplo`): Server Component que lee de `data/`,
+  `loading.tsx`, componente de cliente con override de favoritos y su test, función pura con
+  `it.each`.
 
 | Estado | Dónde |
 |---|---|
@@ -93,6 +98,15 @@ clickeable mínima de 44 px en móvil. Foco visible. Respeta `prefers-reduced-mo
   `src/features/*/domain/**`.
 - Componente de cliente: Vitest + Testing Library, un test por mecanismo.
 - Flujo entre páginas (filtro en la URL, borrar y volver a la lista): Playwright.
+
+## Cómo trabajamos
+
+- Comandos de Claude Code (`.claude/commands/`): `/retomar` (dónde quedamos, según el Estado del
+  plan), `/revisar` (diff + linter + tipos + tests, sin corregir), `/cerrar-paso` (commit +
+  plan) y `/pr` (descripción del PR desde `docs/pr.md`).
+- Plan de cada historia en `docs/superpowers/plans/` (plantilla `_plantilla.md`), con la sección
+  Estado al día al cerrar cada paso.
+- Antes de marcar un card como `feito`: `docs/checklist-pantalla.md`.
 
 ## Antes del PR
 

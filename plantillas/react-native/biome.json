@@ -1,0 +1,198 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": [
+			"**",
+			"!**/.expo",
+			"!**/.expo-export",
+			"!**/coverage",
+			"!**/android",
+			"!**/ios",
+			"!**/src/components/ui",
+			"!**/src/shared/ui",
+			"!expo-env.d.ts",
+			"!uniwind-types.d.ts",
+			"!**/*.svg",
+			"!**/drizzle",
+			"!**/migrations",
+			"!**/*.md"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 100
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"plugins": [
+		"./biome-plugins/no-raw-values.grit"
+	],
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"correctness": {
+				"useExhaustiveDependencies": "info"
+			},
+			"nursery": {
+				"useTailwindSortedClasses": {
+					"level": "warn",
+					"fix": "safe"
+				}
+			},
+			"style": {
+				"noDefaultExport": "error",
+				"useAsConstAssertion": "error",
+				"useSelfClosingElements": "error",
+				"noUselessElse": "error",
+				"useFilenamingConvention": {
+					"level": "error",
+					"options": {
+						"filenameCases": [
+							"kebab-case"
+						]
+					}
+				}
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": [
+				"src/**/*.css"
+			],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noDuplicateCustomProperties": "off"
+					},
+					"a11y": {
+						"useGenericFontNames": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": [
+				"src/app/**",
+				"*.config.js",
+				"*.config.ts",
+				"*.config.mjs"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": [
+				"src/**"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": [
+											"@/features/*/**"
+										],
+										"message": "Importa la feature por su index: @/features/<feature>."
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"includes": [
+				"src/features/*/domain/**"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"paths": {
+									"react": "domain/ es puro: sin React.",
+									"react-native": "domain/ es puro: sin React Native."
+								},
+								"patterns": [
+									{
+										"group": [
+											"@/features/*/**"
+										],
+										"message": "Importa la feature por su index: @/features/<feature>."
+									},
+									{
+										"group": [
+											"expo-*",
+											"**/data/**",
+											"@/shared/db/**",
+											"@/shared/http/**"
+										],
+										"message": "domain/ es puro: el I/O va en data/."
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"includes": [
+				"src/shared/**"
+			],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": [
+											"@/features/**",
+											"**/features/**"
+										],
+										"message": "shared/ no importa features/."
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	],
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
+}

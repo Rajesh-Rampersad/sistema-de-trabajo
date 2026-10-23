@@ -1,0 +1,9 @@
+language js
+
+// className (y variantes como contentContainerClassName) con valor arbitrario: bg-[#fff], p-[12px],
+// tracking-[-0.4px]. Una medida del Figma sin token se agrega al @theme con el nombre del Figma.
+JsxAttribute(name=$n, initializer=$v) where {
+	$n <: r"[a-zA-Z]*[cC]lassName",
+	$v <: r".*-\[-?[#0-9].*",
+	register_diagnostic(span=$v, message="Valor suelto en className: usa un token del @theme.", severity="error")
+}
